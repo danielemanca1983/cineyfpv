@@ -775,21 +775,26 @@
     function renderNativePlayer(videoId, title, media, isFileProtocol) {
       destroyModalPlayer();
       iframeContainer.innerHTML = `
-        <div class="relative w-full h-full bg-[#101716] flex flex-col justify-between">
-          <video
-            id="modal-native-video-el"
-            class="w-full flex-1 min-h-0 object-contain bg-black"
-            src="${media.nativeVideoUrl}"
-            poster="${media.posterUrl}"
-            controls
-            autoplay
-            playsinline
-          ></video>
-          <div class="px-4 py-2.5 bg-[#101716]/95 border-t border-[#F7F7F2]/10 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+        <div class="relative w-full bg-[#101716] flex flex-col">
+          <div id="modal-video-stage" class="relative w-full h-[54vh] sm:h-auto sm:aspect-video max-h-[75vh] bg-black flex items-center justify-center overflow-hidden">
+            <video
+              id="modal-native-video-el"
+              class="w-full h-full object-contain bg-black transition-all"
+              src="${media.nativeVideoUrl}"
+              poster="${media.posterUrl}"
+              controls
+              autoplay
+              playsinline
+            ></video>
+          </div>
+          <div class="px-4 py-3 bg-[#101716]/95 border-t border-[#F7F7F2]/10 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
             <span class="text-[#C9F36B]">
               Playing Full-Length CINEYFPV Video (${title || videoId})
             </span>
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-3 sm:gap-4">
+              <button type="button" id="js-toggle-video-fit" class="sm:hidden text-[#C9F36B] hover:underline cursor-pointer">
+                Fill Vertical
+              </button>
               ${
                 !isFileProtocol
                   ? `<button type="button" id="js-switch-to-yt" class="text-[#F7F7F2]/80 hover:text-[#C9F36B] underline cursor-pointer">Switch to YouTube Embed</button>`
@@ -803,8 +808,22 @@
         </div>
       `;
 
-      // Fallback if the local ./videos/<id>.mp4 file is missing or moved
       const videoEl = document.getElementById("modal-native-video-el");
+      const toggleFitBtn = document.getElementById("js-toggle-video-fit");
+      if (toggleFitBtn && videoEl) {
+        toggleFitBtn.addEventListener("click", () => {
+          const isCover = videoEl.classList.contains("object-cover");
+          if (isCover) {
+            videoEl.classList.remove("object-cover");
+            videoEl.classList.add("object-contain");
+            toggleFitBtn.textContent = "Fill Vertical";
+          } else {
+            videoEl.classList.remove("object-contain");
+            videoEl.classList.add("object-cover");
+            toggleFitBtn.textContent = "Fit Full Frame";
+          }
+        });
+      }
       if (videoEl && media.remotePreviewUrl) {
         videoEl.addEventListener(
           "error",
@@ -840,16 +859,18 @@
         : "";
 
       iframeContainer.innerHTML = `
-        <div class="relative w-full h-full bg-black flex flex-col">
-          <iframe
-            class="w-full flex-1 min-h-0 border-0"
-            src="https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1&rel=0&modestbranding=1&playsinline=1${originParam}"
-            title="${title || "CINEYFPV Project Video"}"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
-          ></iframe>
-          <div class="px-4 py-2 bg-[#101716] border-t border-[#F7F7F2]/10 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+        <div class="relative w-full bg-[#101716] flex flex-col">
+          <div class="relative w-full min-h-[54vh] sm:min-h-0 sm:aspect-video max-h-[72vh] bg-black flex items-center justify-center overflow-hidden">
+            <iframe
+              class="w-full h-full min-h-[54vh] sm:min-h-0 sm:aspect-video border-0"
+              src="https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1&rel=0&modestbranding=1&playsinline=1${originParam}"
+              title="${title || "CINEYFPV Project Video"}"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div class="px-4 py-3 bg-[#101716] border-t border-[#F7F7F2]/10 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
             <span class="text-[#F7F7F2]/75">
               Playing Full-Length YouTube Video
             </span>
