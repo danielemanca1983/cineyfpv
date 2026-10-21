@@ -618,47 +618,12 @@
       nativeVideo.removeAttribute("autoplay");
     }
 
-    // Load Official YouTube IFrame Player API for the verified CINEYFPV video (1x0bQfC6RDM)
-    // Only instantiate the background YouTube IFrame over http/https (on file://, nativeVideo provides the ambient loop)
-    const isHttpProtocol = window.location.protocol.startsWith("http");
-    if (!prefersReducedMotion && ytContainer && isHttpProtocol) {
-      const tag = document.createElement("script");
-      tag.src = "https://www.youtube.com/iframe_api";
-      const firstScriptTag = document.getElementsByTagName("script")[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-      window.onYouTubeIframeAPIReady = function () {
-        ytHeroPlayer = new window.YT.Player("hero-yt-player", {
-          videoId: config.hero.youtubeVideoId,
-          playerVars: {
-            autoplay: 1,
-            controls: 0,
-            rel: 0,
-            showinfo: 0,
-            mute: 1,
-            loop: 1,
-            playlist: config.hero.youtubeVideoId,
-            playsinline: 1,
-            modestbranding: 1,
-            iv_load_policy: 3,
-            disablekb: 1
-          },
-          events: {
-            onReady: function (event) {
-              event.target.mute();
-              event.target.playVideo();
-            },
-            onStateChange: function (event) {
-              if (event.data === window.YT.PlayerState.PLAYING) {
-                ytContainer.classList.remove("opacity-0");
-                ytContainer.classList.add("opacity-100");
-              } else if (event.data === window.YT.PlayerState.ENDED) {
-                ytHeroPlayer.playVideo();
-              }
-            }
-          }
-        });
-      };
+    // Use the clean native MP4 ambient loop for the hero background across both local and live environments.
+    // Creating a YouTube IFrame over the hero section causes a top black letterbox bar because `.hero-video-cover`
+    // uses `100vw / 56.25vw` while `#top` is taller than `100vh` (due to the floating panel inside `#top`),
+    // and pausing/resuming the YouTube IFrame on scroll flashes YouTube's top title bar.
+    if (ytContainer) {
+      ytContainer.classList.add("hidden");
     }
 
     // Pause hero playback when scrolled completely off-screen to protect performance
