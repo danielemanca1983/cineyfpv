@@ -616,12 +616,14 @@
     if (prefersReducedMotion && nativeVideo) {
       nativeVideo.pause();
       nativeVideo.removeAttribute("autoplay");
+    } else if (nativeVideo) {
+      nativeVideo.muted = true;
+      nativeVideo.defaultMuted = true;
+      nativeVideo.setAttribute("playsinline", "");
+      nativeVideo.setAttribute("webkit-playsinline", "");
+      nativeVideo.play().catch(() => {});
     }
 
-    // Use the clean native MP4 ambient loop for the hero background across both local and live environments.
-    // Creating a YouTube IFrame over the hero section causes a top black letterbox bar because `.hero-video-cover`
-    // uses `100vw / 56.25vw` while `#top` is taller than `100vh` (due to the floating panel inside `#top`),
-    // and pausing/resuming the YouTube IFrame on scroll flashes YouTube's top title bar.
     if (ytContainer) {
       ytContainer.classList.add("hidden");
     }

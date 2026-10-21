@@ -247,104 +247,107 @@
     <!-- ====================================================================
          HERO SECTION (Full-Bleed CINEYFPV Video + Editorial Overlay + Floating Panel)
          ==================================================================== -->
-    <section id="top" class="relative min-h-screen w-full flex flex-col justify-between overflow-hidden bg-[#101716]">
-      <!-- Full-Bleed Background Video Layer -->
-      <div class="hero-media-wrapper" aria-hidden="true">
-        <!-- High-res CINEYFPV poster & native looping video stream for instant zero-letterbox paint -->
-        <video
-          id="hero-native-video"
-          class="hero-native-video"
-          src="https://framerusercontent.com/assets/lAPPtwOlWBxSSpLmQwWGogo5OCw.mp4"
-          poster="https://framerusercontent.com/images/Q77K0JSMO5Y9btETkqZMDVKzEY.jpg?width=1920&height=1080"
-          autoplay
-          muted
-          loop
-          playsinline
-        ></video>
+    <section id="top" class="relative w-full overflow-hidden bg-[#101716]">
+      <!-- Top Viewport Stage: Full-Bleed Background Video + Hero Copy -->
+      <div class="relative min-h-[100svh] lg:min-h-screen w-full flex flex-col justify-between">
+        <!-- Full-Bleed Background Video Layer -->
+        <div class="hero-media-wrapper" aria-hidden="true">
+          <!-- High-res CINEYFPV poster & native looping video stream for instant zero-letterbox paint -->
+          <video
+            id="hero-native-video"
+            class="hero-native-video"
+            src="https://framerusercontent.com/assets/lAPPtwOlWBxSSpLmQwWGogo5OCw.mp4"
+            poster="https://framerusercontent.com/images/Q77K0JSMO5Y9btETkqZMDVKzEY.jpg?width=1920&height=1080"
+            autoplay
+            muted
+            loop
+            playsinline
+          ></video>
 
-        <!-- Official YouTube IFrame Player Embed (Verified CINEYFPV Video: 1x0bQfC6RDM — Tramnak Property Tour) -->
-        <div id="hero-youtube-iframe-wrapper" class="opacity-0 transition-opacity duration-1000">
-          <div id="hero-yt-player" class="hero-video-cover"></div>
-        </div>
-
-        <!-- Layered Gradients for Text Legibility & Header Contrast -->
-        <div class="hero-overlay-main absolute inset-0"></div>
-        <div class="hero-overlay-nav absolute top-0 left-0 right-0 h-36"></div>
-        <div class="hero-overlay-bottom absolute bottom-0 left-0 right-0 h-48"></div>
-      </div>
-
-      <!-- Main Hero Content Container -->
-      <div class="relative z-10 max-w-[1440px] w-full mx-auto px-5 sm:px-8 lg:px-14 pt-32 sm:pt-40 lg:pt-44 pb-12 lg:pb-16 my-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
-          <!-- Left Editorial Column -->
-          <div class="lg:col-span-9 xl:col-span-8">
-            <div class="js-hero-animate inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#101716]/65 backdrop-blur-md border border-[#F7F7F2]/15 mb-6">
-              <span class="w-2 h-2 rounded-full bg-[#C9F36B]"></span>
-              <span class="eyebrow-label text-[#F7F7F2]">CINEMATIC FPV DRONE TOURS</span>
-            </div>
-
-            <h1 class="js-hero-animate hero-headline text-[#F7F7F2] mb-6 max-w-[14.5ch]">
-              Your space deserves to be experienced.
-            </h1>
-
-            <p class="js-hero-animate text-base sm:text-lg lg:text-xl text-[#F7F7F2]/85 leading-relaxed max-w-2xl mb-9 font-normal">
-              Take clients beyond static images with seamless, cinematic drone fly-throughs that bring every space to life.
-            </p>
-
-            <!-- Hero CTAs -->
-            <div class="js-hero-animate flex flex-wrap items-center gap-4">
-              <a
-                href="#contact"
-                class="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-full bg-[#C9F36B] text-[#101716] font-heading text-base font-bold tracking-tight hover:bg-[#F7F7F2] hover:translate-y-[-1px] transition-all duration-300 shadow-lg"
-              >
-                <span>Discuss Your Project</span>
-                <span aria-hidden="true">↗</span>
-              </a>
-
-              <button
-                type="button"
-                data-video-id="1x0bQfC6RDM"
-                data-video-title="Tramnak Property & Fit-Out Tour — CINEYFPV"
-                data-video-industry="Commercial Property & Construction"
-                class="js-open-video inline-flex items-center justify-center gap-3 px-7 py-4 rounded-full bg-[#101716]/65 backdrop-blur-md border border-[#F7F7F2]/30 text-[#F7F7F2] font-heading text-base font-semibold hover:bg-[#F7F7F2] hover:text-[#101716] hover:border-[#F7F7F2] transition-all duration-300 cursor-pointer"
-              >
-                <span>Watch Our Work</span>
-                <span class="text-[#C9F36B] group-hover:text-[#101716]" aria-hidden="true">▶</span>
-              </button>
-            </div>
+          <!-- Official YouTube IFrame Player Embed (Verified CINEYFPV Video: 1x0bQfC6RDM — Tramnak Property Tour) -->
+          <div id="hero-youtube-iframe-wrapper" class="opacity-0 transition-opacity duration-1000">
+            <div id="hero-yt-player" class="hero-video-cover"></div>
           </div>
 
-          <!-- Right Metadata & Ambient Video Controls -->
-          <div class="lg:col-span-3 xl:col-span-4 flex flex-col lg:items-end justify-end gap-4 pt-4 lg:pt-0">
-            <p class="js-hero-animate font-mono text-[11px] uppercase tracking-[0.16em] text-[#F7F7F2]/70 lg:text-right leading-relaxed">
-              INDOOR FPV / COMMERCIAL SPACES / CINEMATIC FILMMAKING
-            </p>
-            <div class="js-hero-animate flex items-center gap-4">
-              <button
-                type="button"
-                id="hero-playback-toggle"
-                data-paused="false"
-                aria-label="Pause background video"
-                class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#101716]/70 backdrop-blur-md border border-[#F7F7F2]/15 font-mono text-[11px] uppercase tracking-wider text-[#F7F7F2]/80 hover:text-[#F7F7F2] hover:border-[#F7F7F2]/40 transition-colors cursor-pointer"
-              >
-                <span class="w-2 h-2 rounded-full bg-[#C9F36B]"></span>
-                <span>Pause Ambient</span>
-              </button>
+          <!-- Layered Gradients for Text Legibility & Header Contrast -->
+          <div class="hero-overlay-main absolute inset-0"></div>
+          <div class="hero-overlay-nav absolute top-0 left-0 right-0 h-36"></div>
+          <div class="hero-overlay-bottom absolute bottom-0 left-0 right-0 h-48"></div>
+        </div>
 
-              <a
-                href="#work"
-                class="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-[#F7F7F2]/75 hover:text-[#C9F36B] transition-colors"
-              >
-                <span>Scroll</span>
-                <span aria-hidden="true">↓</span>
-              </a>
+        <!-- Main Hero Content Container -->
+        <div class="relative z-10 max-w-[1440px] w-full mx-auto px-5 sm:px-8 lg:px-14 pt-32 sm:pt-40 lg:pt-44 pb-12 lg:pb-24 my-auto">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+            <!-- Left Editorial Column -->
+            <div class="lg:col-span-9 xl:col-span-8">
+              <div class="js-hero-animate inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#101716]/65 backdrop-blur-md border border-[#F7F7F2]/15 mb-6">
+                <span class="w-2 h-2 rounded-full bg-[#C9F36B]"></span>
+                <span class="eyebrow-label text-[#F7F7F2]">CINEMATIC FPV DRONE TOURS</span>
+              </div>
+
+              <h1 class="js-hero-animate hero-headline text-[#F7F7F2] mb-6 max-w-[14.5ch]">
+                Your space deserves to be experienced.
+              </h1>
+
+              <p class="js-hero-animate text-base sm:text-lg lg:text-xl text-[#F7F7F2]/85 leading-relaxed max-w-2xl mb-9 font-normal">
+                Take clients beyond static images with seamless, cinematic drone fly-throughs that bring every space to life.
+              </p>
+
+              <!-- Hero CTAs -->
+              <div class="js-hero-animate flex flex-wrap items-center gap-4">
+                <a
+                  href="#contact"
+                  class="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-full bg-[#C9F36B] text-[#101716] font-heading text-base font-bold tracking-tight hover:bg-[#F7F7F2] hover:translate-y-[-1px] transition-all duration-300 shadow-lg"
+                >
+                  <span>Discuss Your Project</span>
+                  <span aria-hidden="true">↗</span>
+                </a>
+
+                <button
+                  type="button"
+                  data-video-id="1x0bQfC6RDM"
+                  data-video-title="Tramnak Property & Fit-Out Tour — CINEYFPV"
+                  data-video-industry="Commercial Property & Construction"
+                  class="js-open-video inline-flex items-center justify-center gap-3 px-7 py-4 rounded-full bg-[#101716]/65 backdrop-blur-md border border-[#F7F7F2]/30 text-[#F7F7F2] font-heading text-base font-semibold hover:bg-[#F7F7F2] hover:text-[#101716] hover:border-[#F7F7F2] transition-all duration-300 cursor-pointer"
+                >
+                  <span>Watch Our Work</span>
+                  <span class="text-[#C9F36B] group-hover:text-[#101716]" aria-hidden="true">▶</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Right Metadata & Ambient Video Controls -->
+            <div class="lg:col-span-3 xl:col-span-4 flex flex-col lg:items-end justify-end gap-4 pt-4 lg:pt-0">
+              <p class="js-hero-animate font-mono text-[11px] uppercase tracking-[0.16em] text-[#F7F7F2]/70 lg:text-right leading-relaxed">
+                INDOOR FPV / COMMERCIAL SPACES / CINEMATIC FILMMAKING
+              </p>
+              <div class="js-hero-animate flex items-center gap-4">
+                <button
+                  type="button"
+                  id="hero-playback-toggle"
+                  data-paused="false"
+                  aria-label="Pause background video"
+                  class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#101716]/70 backdrop-blur-md border border-[#F7F7F2]/15 font-mono text-[11px] uppercase tracking-wider text-[#F7F7F2]/80 hover:text-[#F7F7F2] hover:border-[#F7F7F2]/40 transition-colors cursor-pointer"
+                >
+                  <span class="w-2 h-2 rounded-full bg-[#C9F36B]"></span>
+                  <span>Pause Ambient</span>
+                </button>
+
+                <a
+                  href="#work"
+                  class="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-[#F7F7F2]/75 hover:text-[#C9F36B] transition-colors"
+                >
+                  <span>Scroll</span>
+                  <span aria-hidden="true">↓</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Integrated Floating Hero Panel (Inspired by Reference Composition) -->
-      <div class="relative z-20 max-w-[1440px] w-full mx-auto px-5 sm:px-8 lg:px-14 pb-8 sm:pb-12">
+      <div class="relative z-20 max-w-[1440px] w-full mx-auto px-5 sm:px-8 lg:px-14 -mt-4 lg:-mt-16 pb-8 sm:pb-12">
         <div class="hero-floating-panel rounded-2xl overflow-hidden border border-[#101716]/10">
           <div id="hero-benefits-grid" class="grid grid-cols-1 lg:grid-cols-4">
             <!-- Populated dynamically from CINEY_CONFIG.hero.floatingPanelBenefits -->
