@@ -1,0 +1,304 @@
+/* ==========================================================================
+   CINEYFPV — Custom Editorial Styles, Design Tokens & Accessibility
+   ========================================================================== */
+
+:root {
+  --color-obsidian: #101716;
+  --color-ivory: #F5F3EE;
+  --color-lime: #C9F36B;
+  --color-sage: #57786F;
+  --color-graphite: #252D2B;
+  --color-offwhite: #F7F7F2;
+  --color-error: #E5484D;
+  --color-success: #30A46C;
+
+  --font-heading: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  --max-content: 1440px;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-obsidian);
+  color: var(--color-offwhite);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+body {
+  overflow-x: clip;
+  margin: 0;
+  padding: 0;
+}
+
+/* Offset anchor scroll positions for sticky header */
+section[id],
+div[id] {
+  scroll-margin-top: 88px;
+}
+
+/* Typography Fluid Scales */
+.hero-headline {
+  font-family: var(--font-heading);
+  font-size: clamp(2.65rem, 5.6vw + 0.75rem, 6.15rem);
+  line-height: 1.02;
+  letter-spacing: -0.032em;
+  font-weight: 700;
+}
+
+.section-headline {
+  font-family: var(--font-heading);
+  font-size: clamp(2.15rem, 3.6vw + 0.5rem, 4.25rem);
+  line-height: 1.07;
+  letter-spacing: -0.028em;
+  font-weight: 700;
+}
+
+.subsection-headline {
+  font-family: var(--font-heading);
+  font-size: clamp(1.35rem, 1.5vw + 0.5rem, 2rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+.eyebrow-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* Full-Bleed Hero Video Cover System (16:9 aspect cover inside any viewport) */
+.hero-media-wrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  background-color: var(--color-obsidian);
+}
+
+.hero-video-cover {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 56.25vw; /* 16:9 ratio */
+  min-height: 100%;
+  min-width: 177.78vh; /* 16:9 ratio */
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  object-fit: cover;
+}
+
+.hero-native-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* Layered Hero Overlays for Guaranteed Readability */
+.hero-overlay-nav {
+  background: linear-gradient(
+    180deg,
+    rgba(16, 23, 22, 0.86) 0%,
+    rgba(16, 23, 22, 0.48) 55%,
+    rgba(16, 23, 22, 0) 100%
+  );
+}
+
+.hero-overlay-main {
+  background: radial-gradient(
+      circle at 22% 45%,
+      rgba(16, 23, 22, 0.76) 0%,
+      rgba(16, 23, 22, 0.42) 52%,
+      rgba(16, 23, 22, 0.22) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(16, 23, 22, 0.84) 0%,
+      rgba(16, 23, 22, 0.52) 50%,
+      rgba(16, 23, 22, 0.18) 100%
+    );
+}
+
+.hero-overlay-bottom {
+  background: linear-gradient(
+    180deg,
+    rgba(16, 23, 22, 0) 0%,
+    rgba(16, 23, 22, 0.68) 55%,
+    rgba(16, 23, 22, 1) 100%
+  );
+}
+
+/* Header States */
+.site-header {
+  background: linear-gradient(
+    180deg,
+    rgba(16, 23, 22, 0.88) 0%,
+    rgba(16, 23, 22, 0.55) 65%,
+    rgba(16, 23, 22, 0) 100%
+  );
+  transition: background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              backdrop-filter 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              padding 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.site-header.is-scrolled {
+  background: rgba(16, 23, 22, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(247, 247, 242, 0.12);
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+/* Mobile Navigation Overlay — Guaranteed Solid Contrast */
+.mobile-nav-overlay {
+  background-color: #101716 !important;
+  background-image: radial-gradient(
+    circle at 85% 15%,
+    rgba(87, 120, 111, 0.22) 0%,
+    rgba(16, 23, 22, 0.98) 60%,
+    #101716 100%
+  );
+}
+
+/* Floating Hero Panel (Inspired by Reference Image) */
+.hero-floating-panel {
+  background-color: rgba(245, 243, 238, 0.97);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 28px 60px -15px rgba(10, 15, 14, 0.45);
+}
+
+/* Card & Image Hover Refinement */
+.media-card-zoom {
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.group:hover .media-card-zoom,
+.group:focus-within .media-card-zoom {
+  transform: scale(1.045);
+}
+
+/* Accessible Native <dialog> Modal & Backdrop */
+dialog#video-modal {
+  border: none;
+  padding: 0;
+  background: transparent;
+  max-width: min(1160px, 94vw);
+  width: 100%;
+  margin: auto;
+  overflow: visible;
+}
+
+dialog#video-modal::backdrop {
+  background-color: rgba(10, 15, 14, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+dialog#video-modal[open] {
+  animation: modalFadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Accessible Form Validation (:user-invalid + fallback class) */
+.field-error-msg {
+  display: none;
+  color: #FF8B8E;
+  font-size: 0.8125rem;
+  margin-top: 0.4rem;
+  font-family: var(--font-body);
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.form-input:user-invalid,
+.form-input.user-invalid-fallback {
+  border-color: #E5484D !important;
+  background-color: rgba(229, 72, 77, 0.08) !important;
+}
+
+.form-input:user-invalid ~ .field-error-msg,
+.form-input.user-invalid-fallback ~ .field-error-msg {
+  display: flex;
+}
+
+.form-input:required:user-valid,
+.form-input.user-valid-fallback {
+  border-color: #57786F;
+}
+
+/* Accordion Smooth Height Transition */
+.faq-content-grid {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faq-content-grid.is-open {
+  grid-template-rows: 1fr;
+}
+
+.faq-content-inner {
+  overflow: hidden;
+}
+
+/* Visible Keyboard Focus Rings */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-lime);
+  outline-offset: 3px;
+}
+
+/* Light Section Focus Override for Contrast */
+.light-surface a:focus-visible,
+.light-surface button:focus-visible {
+  outline: 2px solid var(--color-obsidian);
+  outline-offset: 3px;
+}
+
+/* Reduced Motion Compliance */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .media-card-zoom {
+    transform: none !important;
+  }
+}
